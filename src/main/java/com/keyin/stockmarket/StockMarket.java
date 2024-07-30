@@ -15,6 +15,9 @@ public class StockMarket {
     @GeneratedValue(generator = "stockMarket_sequence")
     private long stockMarketId;
 
+    public StockMarket(String nyse) {
+    }
+
     public void setStock(Stock stock) {
     }
 }

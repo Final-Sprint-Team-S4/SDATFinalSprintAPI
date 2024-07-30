@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,11 @@ public class StockService {
 
     @Transactional
     public Stock createStock(String stockName, List<StockMarket> stockMarkets, double stockPrice) {
+        if (stockMarkets == null) {
+            stockMarkets = new ArrayList<>();
+            stockMarkets.add(new StockMarket("NYSE")); // or adjust according to your needs
+        }
+
         Stock stock = new Stock();
         stock.setStockName(stockName);
         stock.setStockMarkets(stockMarkets);
