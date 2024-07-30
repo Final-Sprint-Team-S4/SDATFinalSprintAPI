@@ -1,33 +1,33 @@
 package com.keyin.buyers;
 
-import com.keyin.buyers.stock.Buyers;
-import com.keyin.buyers.services.BuyersService;
+import com.keyin.buyers.Buyers;
+import com.keyin.buyers.BuyersService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController@RequestMapping("/api/buyers")publicclassBuyersController {
+@RestController @RequestMapping("/api/buyers") public class BuyersController {
     BuyersService buyersService;
 
-    @GetMappingpublic List<Buyers> getAllBuyers() {
+    @GetMapping public List<Buyers> getAllBuyers() {
         return buyersService.getAllBuyers();
     }
 
     @GetMapping("/{id}")public ResponseEntity<Buyers> getBuyerById(@PathVariable Long id) {
-        Buyersbuyer= buyersService.getBuyerById(id);
+        Buyers buyer= buyersService.getBuyerById(id);
         if (buyer == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(buyer);
     }
 
-    @PostMappingpublic Buyers createBuyer(@RequestBody Buyers buyer) {
+    @PostMapping public Buyers createBuyer(@RequestBody Buyers buyer) {
         return buyersService.addBuyer(buyer);
     }
 
     @PutMapping("/{id}")public ResponseEntity<Buyers> updateBuyer(@PathVariable Long id, @RequestBody Buyers buyerDetails) {
-        BuyersupdatedBuyer= buyersService.updateBuyer(id, buyerDetails);
+        Buyers updatedBuyer= buyersService.updateBuyer(id, buyerDetails);
         if (updatedBuyer == null) {
             return ResponseEntity.notFound().build();
         }

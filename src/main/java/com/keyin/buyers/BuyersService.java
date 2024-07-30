@@ -1,17 +1,17 @@
 package com.keyin.buyers;
 
-import com.keyin.buyers.models.Buyers;
-import com.keyin.buyers.repositories.BuyersRepository;
+import com.keyin.buyers.Buyers;
+import com.keyin.buyers.BuyersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@ServicepublicclassBuyersService {
-    @Autowiredprivate BuyersRepository buyersRepository;
+@Service public class BuyersService {
+    @Autowired private BuyersRepository buyersRepository;
 
     public List<Buyers> getAllBuyers() {
-        return buyersRepository.findAll();
+        return (List<Buyers>) buyersRepository.findAll();
     }
     public Buyers getBuyerById(Long id) {
         return buyersRepository.findById(id).orElse(null);
@@ -20,7 +20,7 @@ import java.util.List;
         return buyersRepository.save(buyer);
     }
     public Buyers updateBuyer(Long id, Buyers buyerDetails) {
-        Buyersbuyer= buyersRepository.findById(id).orElse(null);
+        Buyers buyer= buyersRepository.findById(id).orElse(null);
         if (buyer != null) {
 
             buyer.setName(buyerDetails.getName());
@@ -30,9 +30,9 @@ import java.util.List;
             buyer.setStockMarket(buyerDetails.getStockMarket());
             return buyersRepository.save(buyer);
         }
-        returnnull;
+        return null;
     }
-    publicvoiddeleteBuyer(Long id) {
+    public void deleteBuyer(Long id) {
         buyersRepository.deleteById(id);
     }
 }
