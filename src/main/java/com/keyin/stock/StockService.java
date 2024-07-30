@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StockService {
@@ -34,5 +35,36 @@ public class StockService {
         }
 
         return stock;
+    }
+
+    public Stock getStockById(Long id) {
+        Optional<Stock> stock = stockRepository.findById(id);
+        return stock.orElse(null);
+    }
+
+    public List<Stock> getAllStocks() {
+        return (List<Stock>) stockRepository.findAll();
+    }
+
+    public Stock updateStock(Long id, String stockName, List<StockMarket> stockMarkets, double stockPrice) {
+        Optional<Stock> stockOptional = stockRepository.findById(id);
+        if (stockOptional.isPresent()) {
+            Stock stock = stockOptional.get();
+            stock.setStockName(stockName);
+            stock.setStockMarkets(stockMarkets);
+            stock.setStockPrice(stockPrice);
+            return stockRepository.save(stock);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean deleteStock(Long id) {
+        if (stockRepository.existsById(id)) {
+            stockRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
