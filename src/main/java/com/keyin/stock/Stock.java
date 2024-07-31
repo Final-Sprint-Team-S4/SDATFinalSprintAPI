@@ -17,18 +17,19 @@ public class Stock {
 
     private String stockName;
 
-    @OneToMany
-    private List<StockMarket> stockMarkets;
+    @ManyToOne
+    @JoinColumn(name = "stock_market_id")
+    private StockMarket stockMarket;
 
     private double stockPrice;
 
     public Stock() {
     }
 
-    public Stock(long stockId, String stockName, List<StockMarket> stockMarket, double stockPrice) {
+    public Stock(long stockId, String stockName, StockMarket stockMarket, double stockPrice) {
         this.stockId = stockId;
         this.stockName = stockName;
-        this.stockMarkets = stockMarket;
+        this.stockMarket = stockMarket;
         this.stockPrice = stockPrice;
     }
 
@@ -48,12 +49,12 @@ public class Stock {
         this.stockName = stockName;
     }
 
-    public List<StockMarket> getStockMarkets() {
-        return stockMarkets;
+    public StockMarket getStockMarket() {
+        return stockMarket;
     }
 
-    public void setStockMarkets(List<StockMarket> stockMarkets) {
-        this.stockMarkets = stockMarkets;
+    public void setStockMarket(StockMarket stockMarket) {
+        this.stockMarket = stockMarket;
     }
 
     public double getStockPrice() {
