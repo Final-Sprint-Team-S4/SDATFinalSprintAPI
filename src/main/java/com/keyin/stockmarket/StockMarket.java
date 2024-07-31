@@ -18,6 +18,7 @@ public class StockMarket {
     private String name;
 
     @OneToMany
+    @JoinColumn(name = "stock_id")
     private List<Stock> stocks = new ArrayList<>();
 
     public StockMarket(String name) {
