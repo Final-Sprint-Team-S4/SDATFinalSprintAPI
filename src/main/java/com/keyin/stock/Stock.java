@@ -7,12 +7,11 @@ import java.util.List;
 
 @Entity
 public class Stock {
-//    id StockName StockMarket StockPrice
-
 
     @Id
     @SequenceGenerator(name = "stock_sequence", sequenceName = "stock_sequence", allocationSize = 1, initialValue=1)
-    @GeneratedValue(generator = "stock_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stock_sequence")
+    @Column(name = "stock_id")
     private long stockId;
 
     private String stockName;
