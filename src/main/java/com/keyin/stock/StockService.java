@@ -19,58 +19,35 @@ public class StockService {
     @Autowired
     private StockMarketRepository stockMarketRepository;
 
-    @Transactional
-    public Stock createStock(String stockName, List<StockMarket> stockMarkets, double stockPrice) {
-        if (stockMarkets == null) {
-            stockMarkets = new ArrayList<>();
-            stockMarkets.add(new StockMarket("NYSE")); // or adjust according to your needs
-        }
-
-        Stock stock = new Stock();
-        stock.setStockName(stockName);
-        stock.setStockMarkets(stockMarkets);
-        stock.setStockPrice(stockPrice);
-
-        // Save the stock to generate the stockId
-        stock = stockRepository.save(stock);
-
-        // Save the stock markets and associate them with the stock
-        for (StockMarket stockMarket : stockMarkets) {
-            stockMarket.setStock(stock);
-            stockMarketRepository.save(stockMarket);
-        }
-
-        return stock;
-    }
-
-    public Stock getStockById(Long id) {
-        Optional<Stock> stock = stockRepository.findById(id);
-        return stock.orElse(null);
-    }
-
     public List<Stock> getAllStocks() {
         return (List<Stock>) stockRepository.findAll();
     }
 
-    public Stock updateStock(Long id, String stockName, List<StockMarket> stockMarkets, double stockPrice) {
-        Optional<Stock> stockOptional = stockRepository.findById(id);
-        if (stockOptional.isPresent()) {
-            Stock stock = stockOptional.get();
-            stock.setStockName(stockName);
-            stock.setStockMarkets(stockMarkets);
-            stock.setStockPrice(stockPrice);
-            return stockRepository.save(stock);
-        } else {
-            return null;
-        }
+    public Stock getStockById(long id) {
+        Optional<Stock> stockMarketOptional = stockRepository.findById(id);
+        return stockMarketOptional.orElse(null);
     }
 
-    public boolean deleteStock(Long id) {
-        if (stockRepository.existsById(id)) {
-            stockRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
+    public void deleteStockById(long id) {
+        stockRepository.deleteById(id);
+    }
+
+    public Stock createStock(Stock newStock) {
+        return stockRepository.save(newStock);
+    }
+
+    public Stock updateStock(long id, Stock updatedStock) {
+        Optional<Stock> stockToUpdateOptional = stockRepository.findById(id);
+
+        if (stockToUpdateOptional.isPresent()) {
+            Stock stockToUpdate = stockToUpdateOptional.get();
+
+            stockToUpdate.setStockName(updatedStock.getStockName());
+            stockToUpdate.setStockPrice(updatedStock.getStockPrice());
+            stockToUpdate.setStockMarket(updatedStock.getStockMarket());
+
+            return stockRepository.save(stockToUpdate);
         }
+        return null; //need to handle null case
     }
 }
