@@ -2,12 +2,15 @@ package com.keyin.buyers;
 
 import com.keyin.buyers.Buyers;
 import com.keyin.buyers.BuyersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/buyers") public class BuyersController {
+@RestController @RequestMapping("/api/buyers")
+public class BuyersController {
+    @Autowired
     BuyersService buyersService;
 
     @GetMapping public List<Buyers> getAllBuyers() {
@@ -22,7 +25,8 @@ import java.util.List;
         return ResponseEntity.ok(buyer);
     }
 
-    @PostMapping public Buyers createBuyer(@RequestBody Buyers buyer) {
+    @PostMapping
+    public Buyers createBuyer(@RequestBody Buyers buyer) {
         return buyersService.addBuyer(buyer);
     }
 
