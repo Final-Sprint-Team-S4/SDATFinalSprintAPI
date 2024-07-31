@@ -12,16 +12,21 @@ public class StockMarket {
 
     @Id
     @SequenceGenerator(name = "stockMarket_sequence", sequenceName = "stockMarket_sequence", allocationSize = 1, initialValue=1)
-    @GeneratedValue(generator = "stockMarket_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stock_market_sequence")
+    @Column(name = "stock_market_id")
     private long stockMarketId;
 
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "stock_id")
-    private List<Stock> stocks = new ArrayList<>();
+    @OneToMany(mappedBy = "stockMarket")
+    private List<Stock> stocks;
 
     public StockMarket(String name) {
+        this.name = name;
+    }
+
+    public StockMarket(long stockMarketId, String name) {
+        this.stockMarketId = stockMarketId;
         this.name = name;
     }
 
