@@ -2,10 +2,10 @@
 package com.keyin.stockmarket;
 
 import com.keyin.stock.Stock;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class StockMarket {
@@ -15,9 +15,49 @@ public class StockMarket {
     @GeneratedValue(generator = "stockMarket_sequence")
     private long stockMarketId;
 
-    public StockMarket(String nyse) {
+    private String name;
+
+    @OneToMany
+    private List<Stock> stocks = new ArrayList<>();
+
+    public StockMarket(String name) {
+        this.name = name;
     }
 
-    public void setStock(Stock stock) {
+    public  StockMarket(){
+    }
+
+    public long getStockMarketId() {
+        return stockMarketId;
+    }
+
+    public void setStockMarketId(long stockMarketId) {
+        this.stockMarketId = stockMarketId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Stock> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(List<Stock> stocks) {
+        this.stocks = stocks;
+    }
+
+    public void addStock(Stock stock) {
+        stocks.add(stock);
+        stock.setStockMarket(this);
+    }
+
+    public void removeStock(Stock stock) {
+        stocks.remove(stock);
+        stock.setStockMarket(null);
     }
 }
