@@ -17,8 +17,8 @@ import java.util.List;
     public Buyers getBuyerById(Long id) {
         return buyersRepository.findById(id).orElse(null);
     }
-    public Buyers addBuyer(Buyers buyer) {
-        return buyersRepository.save(buyer);
+    public Buyers addBuyer(Buyers newBuyer) {
+        return buyersRepository.save(newBuyer);
     }
     public Buyers updateBuyer(Long id, Buyers buyerDetails) {
         Buyers buyer= buyersRepository.findById(id).orElse(null);

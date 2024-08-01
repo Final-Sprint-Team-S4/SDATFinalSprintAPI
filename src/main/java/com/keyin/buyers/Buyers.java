@@ -7,7 +7,8 @@ import com.keyin.stockmarket.StockMarket;
 @Entity
 public class Buyers {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "buyers_sequence", sequenceName = "buyers_sequence", allocationSize = 1, initialValue=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "buyers_sequence")
     private Long id;
     private String name;
     private String email;

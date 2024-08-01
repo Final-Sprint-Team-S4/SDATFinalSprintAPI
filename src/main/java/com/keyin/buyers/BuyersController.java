@@ -25,8 +25,8 @@ public class BuyersController {
     }
 
     @PostMapping
-    public Buyers createBuyer(@RequestBody Buyers buyer) {
-        return buyersService.addBuyer(buyer);
+    public Buyers createBuyer(@RequestBody Buyers newBuyer) {
+        return buyersService.addBuyer(newBuyer);
     }
 
     @PutMapping("/{id}")public ResponseEntity<Buyers> updateBuyer(@PathVariable Long id, @RequestBody Buyers buyerDetails) {
