@@ -1,7 +1,5 @@
 package com.keyin.buyers;
 
-import com.keyin.buyers.Buyers;
-import com.keyin.buyers.BuyersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +8,7 @@ import java.util.List;
 
 @RestController @RequestMapping("/api/buyers")
 public class BuyersController {
+
     @Autowired
     BuyersService buyersService;
 
@@ -38,8 +37,9 @@ public class BuyersController {
         return ResponseEntity.ok(updatedBuyer);
     }
 
-    @DeleteMapping("/{id}")public ResponseEntity<Void> deleteBuyer(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteBuyer(@PathVariable Long id) {
         buyersService.deleteBuyer(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Buyer Has Been Deleted");
     }
 }
