@@ -39,8 +39,8 @@ public class StockMarketController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStockMarket(@PathVariable Long id) {
+    public ResponseEntity<String> deleteStockMarket(@PathVariable Long id) {
         boolean deleted = stockMarketService.deleteStockMarket(id);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        return deleted ? ResponseEntity.ok("Stock Market Was Deleted") : ResponseEntity.notFound().build();
     }
 }

@@ -51,8 +51,8 @@ public class StockController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStock(@PathVariable long id) {
+    public ResponseEntity<String> deleteStock(@PathVariable long id) {
         stockService.deleteStockById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("User Has Been Deleted");
     }
 }

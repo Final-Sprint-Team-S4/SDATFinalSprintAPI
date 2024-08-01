@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service public class BuyersService {
-    @Autowired private BuyersRepository buyersRepository;
+    @Autowired
+    private BuyersRepository buyersRepository;
 
     public List<Buyers> getAllBuyers() {
         return (List<Buyers>) buyersRepository.findAll();
