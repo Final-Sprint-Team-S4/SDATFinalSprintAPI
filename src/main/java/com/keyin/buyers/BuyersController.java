@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/buyers")
+@RestController
+@CrossOrigin
+@RequestMapping("/api/buyers")
 public class BuyersController {
 
     @Autowired
