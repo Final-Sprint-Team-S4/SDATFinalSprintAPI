@@ -7,36 +7,28 @@ import java.util.Optional;
 
 @Service
 public class StockMarketService {
+
     @Autowired
     private StockMarketRepository stockMarketRepository;
 
-    public StockMarket createStockMarket(StockMarket stockMarket) {
-        return stockMarketRepository.save(stockMarket);
+    public Iterable<StockMarket> getAllStockMarkets() {
+        return stockMarketRepository.findAll();
     }
 
     public Optional<StockMarket> getStockMarketById(Long id) {
         return stockMarketRepository.findById(id);
     }
 
-    public Iterable<StockMarket> getAllStockMarkets() {
-        return stockMarketRepository.findAll();
+    public StockMarket createStockMarket(StockMarket stockMarket) {
+        return stockMarketRepository.save(stockMarket);
     }
 
-    public StockMarket updateStockMarket(Long id, StockMarket updatedStockMarket) {
-        if (stockMarketRepository.existsById(id)) {
-            updatedStockMarket.setStockMarketId(id);
-            return stockMarketRepository.save(updatedStockMarket);
-        } else {
-            return null;
-        }
+    public StockMarket updateStockMarket(Long id, StockMarket stockMarket) {
+        stockMarket.setId(id);
+        return stockMarketRepository.save(stockMarket);
     }
 
-    public boolean deleteStockMarket(Long id) {
-        if (stockMarketRepository.existsById(id)) {
-            stockMarketRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+    public void deleteStockMarket(Long id) {
+        stockMarketRepository.deleteById(id);
     }
 }

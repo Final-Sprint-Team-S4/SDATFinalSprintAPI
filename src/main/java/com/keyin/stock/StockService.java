@@ -1,10 +1,11 @@
 package com.keyin.stock;
 
-import com.keyin.stockmarket.StockMarket;
+import com.keyin.buyer.Buyer;
+import com.keyin.buyer.BuyerRepository;
 import com.keyin.stockmarket.StockMarketRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,37 +18,35 @@ public class StockService {
     private StockRepository stockRepository;
 
     @Autowired
-    private StockMarketRepository stockMarketRepository;
+    private BuyerRepository buyerRepository;
 
-    public List<Stock> getAllStocks() {
-        return (List<Stock>) stockRepository.findAll();
-    }
-
-    public Stock getStockById(long id) {
-        Optional<Stock> stockMarketOptional = stockRepository.findById(id);
-        return stockMarketOptional.orElse(null);
-    }
-
-    public void deleteStockById(long id) {
-        stockRepository.deleteById(id);
-    }
-
-    public Stock createStock(Stock newStock) {
-        return stockRepository.save(newStock);
-    }
-
-    public Stock updateStock(long id, Stock updatedStock) {
-        Optional<Stock> stockToUpdateOptional = stockRepository.findById(id);
-
-        if (stockToUpdateOptional.isPresent()) {
-            Stock stockToUpdate = stockToUpdateOptional.get();
-
-            stockToUpdate.setStockName(updatedStock.getStockName());
-            stockToUpdate.setStockPrice(updatedStock.getStockPrice());
-            stockToUpdate.setStockMarket(updatedStock.getStockMarket());
-
-            return stockRepository.save(stockToUpdate);
+    @Transactional
+    public Stock saveStock(Stock stock) {
+        for (Buyer buyer : stock.getBuyers()) {
+            if (buyer.getId() != null) {
+                Buyer existingBuyer = buyerRepository.findById(buyer.getId()).orElse(null);
+                if (existingBuyer != null) {
+                    stock.getBuyers().remove(buyer);
+                    stock.getBuyers().add(existingBuyer);
+                }
+            }
         }
-        return null; //need to handle null case
+        return stockRepository.save(stock);
+    }
+
+    public Optional<Stock> findById(Long id) {
+        return stockRepository.findById(id);
+    }
+
+    public List<Stock> findAll() {
+        Iterable<Stock> stockIterable = stockRepository.findAll();
+        List<Stock> stockList = new ArrayList<>();
+        stockIterable.forEach(stockList::add);
+        return stockList;
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        stockRepository.deleteById(id);
     }
 }

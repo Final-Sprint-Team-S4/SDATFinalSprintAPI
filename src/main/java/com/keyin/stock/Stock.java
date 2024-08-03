@@ -1,51 +1,75 @@
 package com.keyin.stock;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.keyin.buyer.Buyer;
 import com.keyin.stockmarket.StockMarket;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Table(name = "stock")
 public class Stock {
 
     @Id
-    @SequenceGenerator(name = "stock_sequence", sequenceName = "stock_sequence", allocationSize = 1, initialValue=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stock_sequence")
-    @Column(name = "stock_id")
-    private long stockId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-    private String stockName;
+    @Column(name = "symbol")
+    private String symbol;
+
+    @Column(name = "company")
+    private String company;
+
+    @Column(name = "price")
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "stock_market_id")
+    @JsonManagedReference ////////TAKE THIS OUT IF NOT WORKINGGGG
     private StockMarket stockMarket;
 
-    private double stockPrice;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "stock_buyer",
+            joinColumns = @JoinColumn(name = "stock_id"),
+            inverseJoinColumns = @JoinColumn(name = "buyer_id")
+    )
+    private List<Buyer> buyers;
 
-    public Stock() {
+    // Getters and Setters
+
+    public Long getId() {
+        return id;
     }
 
-    public Stock(long stockId, String stockName, StockMarket stockMarket, double stockPrice) {
-        this.stockId = stockId;
-        this.stockName = stockName;
-        this.stockMarket = stockMarket;
-        this.stockPrice = stockPrice;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public long getStockId() {
-        return stockId;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setStockId(long stockId) {
-        this.stockId = stockId;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    public String getStockName() {
-        return stockName;
+    public String getCompany() {
+        return company;
     }
 
-    public void setStockName(String stockName) {
-        this.stockName = stockName;
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public StockMarket getStockMarket() {
@@ -56,11 +80,11 @@ public class Stock {
         this.stockMarket = stockMarket;
     }
 
-    public double getStockPrice() {
-        return stockPrice;
+    public List<Buyer> getBuyers() {
+        return buyers;
     }
 
-    public void setStockPrice(double stockPrice) {
-        this.stockPrice = stockPrice;
+    public void setBuyers(List<Buyer> buyers) {
+        this.buyers = buyers;
     }
 }
