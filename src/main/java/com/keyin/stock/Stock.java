@@ -1,6 +1,6 @@
 package com.keyin.stock;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.keyin.buyer.Buyer;
 import com.keyin.stockmarket.StockMarket;
 import jakarta.persistence.*;
@@ -27,7 +27,7 @@ public class Stock {
 
     @ManyToOne
     @JoinColumn(name = "stock_market_id")
-    @JsonManagedReference ////////TAKE THIS OUT IF NOT WORKINGGGG
+    @JsonBackReference ////////TAKE THIS OUT IF NOT WORKINGGGG
     private StockMarket stockMarket;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -1,6 +1,6 @@
 package com.keyin.stockmarket;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.keyin.stock.Stock;
 import jakarta.persistence.*;
 
@@ -16,7 +16,7 @@ public class StockMarket {
     private String name;
 
     @OneToMany(mappedBy = "stockMarket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonBackReference //TAKE THIS OUT
+    @JsonManagedReference //TAKE THIS OUT
     private List<Stock> stocks;
 
     // Getters and Setters
