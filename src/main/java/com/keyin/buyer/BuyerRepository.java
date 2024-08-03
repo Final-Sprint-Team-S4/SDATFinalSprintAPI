@@ -1,8 +1,8 @@
-package com.keyin.stockmarket;
+package com.keyin.buyer;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StockMarketRepository extends CrudRepository<StockMarket, Long> {
+public interface BuyerRepository extends CrudRepository<Buyer, Long> {
 }

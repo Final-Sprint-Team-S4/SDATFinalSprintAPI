@@ -1,22 +1,19 @@
-package com.keyin.stockmarket;
+package com.keyin.buyer;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.keyin.stock.Stock;
 import jakarta.persistence.*;
+import com.keyin.stock.Stock;
 
 import java.util.List;
 
 @Entity
-public class StockMarket {
-
+public class Buyer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "stockMarket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference //TAKE THIS OUT
+    @ManyToMany(mappedBy = "buyers")
     private List<Stock> stocks;
 
     // Getters and Setters
