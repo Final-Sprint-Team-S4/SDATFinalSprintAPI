@@ -1,6 +1,7 @@
 package com.keyin.stock;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.keyin.buyer.Buyer;
 import com.keyin.stockmarket.StockMarket;
 import jakarta.persistence.*;
