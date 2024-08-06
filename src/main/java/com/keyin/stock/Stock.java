@@ -32,11 +32,11 @@ public class Stock {
     private StockMarket stockMarket;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "stock_buyer",
-            joinColumns = @JoinColumn(name = "stock_id"),
-            inverseJoinColumns = @JoinColumn(name = "buyer_id")
-    )
+//    @JoinTable(
+//            name = "stock_buyer",
+//            joinColumns = @JoinColumn(name = "stock_id"),
+//            inverseJoinColumns = @JoinColumn(name = "buyer_id")
+//    )
     private List<Buyer> buyers;
 
     // Getters and Setters

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Service
 public class BuyerService {
 
@@ -37,6 +39,10 @@ public class BuyerService {
             Stock defaultStock = stockRepository.findBySymbol("Default");
             if(defaultStock == null){
                 defaultStock = new Stock();
+                defaultStock.setSymbol("DEFAULT");
+                defaultStock.setCompany("Default Company");
+                defaultStock.setPrice(0.00);
+                stockRepository.save(defaultStock);
                 stockRepository.save(defaultStock);
             }
 
