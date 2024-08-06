@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/stockmarkets")
 public class StockMarketController {
 
