@@ -14,6 +14,7 @@ public class Buyer {
     private String name;
 
     @ManyToMany(mappedBy = "buyers")
+    //@JsonManagedReference
     private List<Stock> stocks;
 
     // Getters and Setters
