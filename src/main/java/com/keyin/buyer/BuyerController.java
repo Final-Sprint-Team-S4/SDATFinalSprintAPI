@@ -26,10 +26,8 @@ public class BuyerController {
         return ResponseEntity.ok(buyer);
     }
     @PostMapping
-    public ResponseEntity<Buyer> createBuyer(
-            @RequestParam String buyerName,
-            @RequestParam(required = false) List<Long> stockIds) {
-        Buyer savedBuyer = buyerService.createBuyer(buyerName, stockIds);
+    public ResponseEntity<Buyer> createBuyer(@RequestBody Buyer newBuyer) {
+        Buyer savedBuyer = buyerService.createBuyer(newBuyer);
         return ResponseEntity.ok(savedBuyer);
     }
 

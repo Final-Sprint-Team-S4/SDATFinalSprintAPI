@@ -31,32 +31,31 @@ public class BuyerService {
         return buyerRepository.findById(id);
     }
 
-    @Transactional
-    public Buyer createBuyer(String buyerName, List<Long> stockIds) {
-        Buyer buyer = new Buyer();
-        buyer.setName(buyerName);
 
-        List<Stock> stocks = new ArrayList<>();
+    public Buyer createBuyer(Buyer newBuyer) {
+        if(newBuyer.getStocks() == null){
+            Stock defaultStock = stockRepository.findBySymbol("Default");
+            if(defaultStock == null){
+                defaultStock = new Stock();
+                stockRepository.save(defaultStock);
+            }
 
-        if (stockIds == null || stockIds.isEmpty()) {
-            Stock defaultStock = new Stock();
-            defaultStock.setSymbol("DEFAULT");
-            defaultStock.setCompany("Default Company");
-            defaultStock.setPrice(0.0);
-            defaultStock = stockRepository.save(defaultStock);
-            stocks.add(defaultStock);
+            ArrayList<Stock> stockList = new ArrayList<Stock>();
+            stockList.add(defaultStock);
+
+            newBuyer.setStocks(stockList);
         } else {
-            for (Long stockId : stockIds) {
-                Stock stock = stockRepository.findById(stockId).orElse(null);
-                if (stock == null) {
-                    throw new RuntimeException("Stock with id " + stockId + " not found");
+            for(Stock stock: newBuyer.getStocks()){
+                Stock stockInDb = stockRepository.findBySymbol(stock.getSymbol());
+                if (stockInDb == null){
+                    stock = stockRepository.save(stock);
                 }
-                stocks.add(stock);
+
             }
         }
 
-        buyer.setStocks(stocks);
-        return buyerRepository.save(buyer);
+
+        return buyerRepository.save(newBuyer);
     }
 
     public Buyer findById(Long id) {
