@@ -15,27 +15,34 @@ public class BuyerController {
     private BuyerService buyerService;
 
     @GetMapping
-    public Iterable<Buyer> getAllBuyers() {
-        return buyerService.getAllBuyers();
+    public ResponseEntity<List<Buyer>> getAllBuyers() {
+        List<Buyer> buyers = buyerService.findAll();
+        return ResponseEntity.ok(buyers);
     }
 
     @GetMapping("/{id}")
-    public Buyer getBuyerById(@PathVariable Long id) {
-        return buyerService.getBuyerById(id).orElse(null);
+    public ResponseEntity<Buyer> getBuyerById(@PathVariable Long id) {
+        Buyer buyer = buyerService.findById(id);
+        return ResponseEntity.ok(buyer);
     }
-
     @PostMapping
-    public Buyer createBuyer(@RequestBody Buyer buyer) {
-        return buyerService.createBuyer(buyer);
+    public ResponseEntity<Buyer> createBuyer(@RequestBody Buyer newBuyer) {
+        Buyer savedBuyer = buyerService.createBuyer(newBuyer);
+        return ResponseEntity.ok(savedBuyer);
     }
 
     @PutMapping("/{id}")
-    public Buyer updateBuyer(@PathVariable Long id, @RequestBody Buyer buyer) {
-        return buyerService.updateBuyer(id, buyer);
+    public ResponseEntity<Buyer> updateBuyer(
+            @PathVariable Long id,
+            @RequestParam String buyerName,
+            @RequestParam List<Long> stockIds) {
+        Buyer updatedBuyer = buyerService.updateBuyer(id, buyerName, stockIds);
+        return ResponseEntity.ok(updatedBuyer);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBuyer(@PathVariable Long id) {
-        buyerService.deleteBuyer(id);
+    public ResponseEntity<Void> deleteBuyerById(@PathVariable Long id) {
+        buyerService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
