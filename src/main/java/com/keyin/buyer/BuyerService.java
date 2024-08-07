@@ -4,6 +4,7 @@ import com.keyin.stock.Stock;
 import com.keyin.stock.StockRepository;
 import com.keyin.stockmarket.StockMarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,24 +73,24 @@ public class BuyerService {
         return (List<Buyer>) buyerRepository.findAll();
     }
 
-    @Transactional
-    public Buyer updateBuyer(Long id, String buyerName, List<Long> stockIds) {
-        Buyer buyer = buyerRepository.findById(id).orElseThrow(() -> new RuntimeException("Buyer not found"));
-        buyer.setName(buyerName);
-
-        List<Stock> stocks = new ArrayList<>();
-
-        for (Long stockId : stockIds) {
-            Stock stock = stockRepository.findById(stockId).orElse(null);
-            if (stock == null) {
-                throw new RuntimeException("Stock with id " + stockId + " not found");
-            }
-            stocks.add(stock);
-        }
-
-        buyer.setStocks(stocks);
-        return buyerRepository.save(buyer);
-    }
+//    @Transactional
+//    public Buyer updateBuyer(Long id, String buyerName, List<Long> stockIds) {
+//        Buyer buyer = buyerRepository.findById(id).orElseThrow(() -> new RuntimeException("Buyer not found"));
+//        buyer.setName(buyerName);
+//
+//        List<Stock> stocks = new ArrayList<>();
+//
+//        for (Long stockId : stockIds) {
+//            Stock stock = stockRepository.findById(stockId).orElse(null);
+//            if (stock == null) {
+//                throw new RuntimeException("Stock with id " + stockId + " not found");
+//            }
+//            stocks.add(stock);
+//        }
+//
+//        buyer.setStocks(stocks);
+//        return buyerRepository.save(buyer);
+//    }
 
     @Transactional
     public void deleteById(Long id) {
@@ -102,6 +103,12 @@ public class BuyerService {
 
     @Transactional
     public Buyer saveBuyer(Buyer buyer) {
+        return buyerRepository.save(buyer);
+    }
+
+
+    public Buyer updateBuyer(Long id, Buyer buyer) {
+        buyer.setId(id);
         return buyerRepository.save(buyer);
     }
 }

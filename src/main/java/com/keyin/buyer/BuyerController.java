@@ -31,13 +31,18 @@ public class BuyerController {
         return ResponseEntity.ok(savedBuyer);
     }
 
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Buyer> updateBuyer(
+//            @PathVariable Long id,
+//            @RequestParam String buyerName,
+//            @RequestParam List<Long> stockIds) {
+//        Buyer updatedBuyer = buyerService.updateBuyer(id, buyerName, stockIds);
+//        return ResponseEntity.ok(updatedBuyer);
+//    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Buyer> updateBuyer(
-            @PathVariable Long id,
-            @RequestParam String buyerName,
-            @RequestParam List<Long> stockIds) {
-        Buyer updatedBuyer = buyerService.updateBuyer(id, buyerName, stockIds);
-        return ResponseEntity.ok(updatedBuyer);
+    public Buyer updateBuyer(@PathVariable Long id, @RequestBody Buyer buyer) {
+        return buyerService.updateBuyer(id, buyer);
     }
 
     @DeleteMapping("/{id}")
