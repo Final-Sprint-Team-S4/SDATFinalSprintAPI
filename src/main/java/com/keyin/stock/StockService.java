@@ -45,8 +45,15 @@ public class StockService {
         return stockList;
     }
 
+    public Stock updateStock(Long id, Stock stock) {
+        stock.setId(id);
+        return stockRepository.save(stock);
+    }
+
     @Transactional
     public void deleteById(Long id) {
         stockRepository.deleteById(id);
     }
+
+
 }
