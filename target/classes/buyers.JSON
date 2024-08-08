@@ -1,0 +1,178 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "stocks": [
+      {
+        "id": 1,
+        "symbol": "WMT",
+        "company": "Walmart Inc.",
+        "price": 67.30,
+        "stockMarket": {
+          "id": 2
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Michael Smith",
+    "stocks": [
+      {
+        "id": 2,
+        "symbol": "AAPL",
+        "company": "Apple Inc.",
+        "price": 179.50,
+        "stockMarket": {
+          "id": 1
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Linda Johnson",
+    "stocks": [
+      {
+        "id": 3,
+        "symbol": "GOOGL",
+        "company": "Alphabet Inc.",
+        "price": 1254.80,
+        "stockMarket": {
+          "id": 1
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "David Wilson",
+    "stocks": [
+      {
+        "id": 4,
+        "symbol": "MSFT",
+        "company": "Microsoft Corporation",
+        "price": 284.45,
+        "stockMarket": {
+          "id": 1
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Jessica Brown",
+    "stocks": [
+      {
+        "id": 5,
+        "symbol": "TSLA",
+        "company": "Tesla Inc.",
+        "price": 650.30,
+        "stockMarket": {
+          "id": 1
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Robert Davis",
+    "stocks": [
+      {
+        "id": 6,
+        "symbol": "NFLX",
+        "company": "Netflix Inc.",
+        "price": 485.90,
+        "stockMarket": {
+          "id": 1
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Emily Garcia",
+    "stocks": [
+      {
+        "id": 7,
+        "symbol": "AMZN",
+        "company": "Amazon.com, Inc.",
+        "price": 166.37,
+        "stockMarket": {
+          "id": 1
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "William Martinez",
+    "stocks": [
+      {
+        "id": 8,
+        "symbol": "IBM",
+        "company": "IBM Corporation",
+        "price": 132.50,
+        "stockMarket": {
+          "id": 2
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Olivia Anderson",
+    "stocks": [
+      {
+        "id": 9,
+        "symbol": "ORCL",
+        "company": "Oracle Corporation",
+        "price": 92.75,
+        "stockMarket": {
+          "id": 2
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "James Lee",
+    "stocks": [
+      {
+        "id": 10,
+        "symbol": "AMD",
+        "company": "Advanced Micro Devices, Inc.",
+        "price": 110.20,
+        "stockMarket": {
+          "id": 2
+        },
+        "buyers": []
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Sophia Clark",
+    "stocks": [
+      {
+        "id": 11,
+        "symbol": "NVIDIA",
+        "company": "NVIDIA Corporation",
+        "price": 492.20,
+        "stockMarket": {
+          "id": 2
+        },
+        "buyers": []
+      }
+    ]
+  }
+]
