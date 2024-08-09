@@ -104,4 +104,8 @@ public class BuyerService {
     public Buyer saveBuyer(Buyer buyer) {
         return buyerRepository.save(buyer);
     }
+
+    public List<Buyer>  getBuyerByStockSymbol (String stockSymbol) {
+       return buyerRepository.findBuyerByStocks_Symbol(stockSymbol);
+    }
 }

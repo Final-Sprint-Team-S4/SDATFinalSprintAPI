@@ -45,4 +45,8 @@ public class BuyerController {
         buyerService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/searchByStock/{stockSymbol}")
+    public List<Buyer> searchByStockSymbol(@PathVariable String stockSymbol){
+        return buyerService.getBuyerByStockSymbol(stockSymbol);
+    }
 }
